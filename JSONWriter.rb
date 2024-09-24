@@ -52,6 +52,7 @@ end
 
 def write_json_files(namespace, resource_name, flag)
   # Call out to other weapon functions
+  writePickaxeJSON(namespace, resource_name, flag)
   writeSwordJSON(namespace, resource_name, flag)
   writeShovelJSON(namespace, resource_name, flag)
 
@@ -112,6 +113,34 @@ def writeShovelJSON(namespace, resource_name, flag)
   # Write the JSON object to a file
   File.open(namespace + "_" + resource_name + "_shovel.json", "w") do |f|
     f.write(JSON.pretty_generate(shovel))
+  end
+end
+
+def writePickaxeJSON(namespace, resource_name, flag)
+  # Create the JSON object
+  pickaxe = {
+    "type" => "minecraft:crafting_shaped",
+    "pattern" => [
+      "###",
+      " / ",
+      " / "
+    ],
+    "key" => {
+      "#" => {
+        flag == "-i" ? "item" : "tag" => (flag == "-c" ? "c:" : namespace + ":") + resource_name
+      },
+      "/" => {
+        "item" => "minecraft:stick"
+      }
+    },
+    "result" => {
+      "item" => namespace + ":" + resource_name + "_pickaxe"
+    }
+  }
+
+  # Write the JSON object to a file
+  File.open(namespace + "_" + resource_name + "_pickaxe.json", "w") do |f|
+    f.write(JSON.pretty_generate(pickaxe))
   end
 end
 
