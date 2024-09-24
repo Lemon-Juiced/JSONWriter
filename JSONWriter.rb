@@ -55,25 +55,25 @@ def write_json_files(namespace, resource_name, flag)
   writeAxeJSON(namespace, resource_name, flag)
   writeHoeJSON(namespace, resource_name, flag)
   writePickaxeJSON(namespace, resource_name, flag)
-  writeSwordJSON(namespace, resource_name, flag)
   writeShovelJSON(namespace, resource_name, flag)
+  writeSwordJSON(namespace, resource_name, flag)
 
   # Call out to other armor functions
-  writeHelmetJSON(namespace, resource_name, flag)
-  writeChestplateJSON(namespace, resource_name, flag)
-  writeLeggingsJSON(namespace, resource_name, flag)
   writeBootsJSON(namespace, resource_name, flag)
+  writeChestplateJSON(namespace, resource_name, flag)
+  writeHelmetJSON(namespace, resource_name, flag)
+  writeLeggingsJSON(namespace, resource_name, flag)
 
 end
 
-def writeSwordJSON(namespace, resource_name, flag)
+def writeAxeJSON(namespace, resource_name, flag)
   # Create the JSON object
-  sword = {
+  axe = {
     "type" => "minecraft:crafting_shaped",
     "pattern" => [
-      "#",
-      "#",
-      "/"
+      "##",
+      "#/",
+      " /"
     ],
     "key" => {
       "#" => {
@@ -84,41 +84,13 @@ def writeSwordJSON(namespace, resource_name, flag)
       }
     },
     "result" => {
-      "item" => namespace + ":" + resource_name + "_sword"
+      "item" => namespace + ":" + resource_name + "_axe"
     }
   }
 
   # Write the JSON object to a file
-  File.open(namespace + "_" + resource_name + "_sword.json", "w") do |f|
-    f.write(JSON.pretty_generate(sword))
-  end
-end
-
-def writeShovelJSON(namespace, resource_name, flag)
-  # Create the JSON object
-  shovel = {
-    "type" => "minecraft:crafting_shaped",
-    "pattern" => [
-      "#",
-      "/",
-      "/"
-    ],
-    "key" => {
-      "#" => {
-        flag == "-i" ? "item" : "tag" => (flag == "-c" ? "c:" : namespace + ":") + resource_name
-      },
-      "/" => {
-        "item" => "minecraft:stick"
-      }
-    },
-    "result" => {
-      "item" => namespace + ":" + resource_name + "_shovel"
-    }
-  }
-
-  # Write the JSON object to a file
-  File.open(namespace + "_" + resource_name + "_shovel.json", "w") do |f|
-    f.write(JSON.pretty_generate(shovel))
+  File.open(namespace + "_" + resource_name + "_axe.json", "w") do |f|
+    f.write(JSON.pretty_generate(axe))
   end
 end
 
@@ -150,34 +122,6 @@ def writePickaxeJSON(namespace, resource_name, flag)
   end
 end
 
-def writeAxeJSON(namespace, resource_name, flag)
-  # Create the JSON object
-  axe = {
-    "type" => "minecraft:crafting_shaped",
-    "pattern" => [
-      "##",
-      "/#",
-      "/ "
-    ],
-    "key" => {
-      "#" => {
-        flag == "-i" ? "item" : "tag" => (flag == "-c" ? "c:" : namespace + ":") + resource_name
-      },
-      "/" => {
-        "item" => "minecraft:stick"
-      }
-    },
-    "result" => {
-      "item" => namespace + ":" + resource_name + "_axe"
-    }
-  }
-
-  # Write the JSON object to a file
-  File.open(namespace + "_" + resource_name + "_axe.json", "w") do |f|
-    f.write(JSON.pretty_generate(axe))
-  end
-end
-
 def writeHoeJSON(namespace, resource_name, flag)
   # Create the JSON object
   hoe = {
@@ -206,12 +150,68 @@ def writeHoeJSON(namespace, resource_name, flag)
   end
 end
 
-def writeHelmetJSON(namespace, resource_name, flag)
+def writeShovelJSON(namespace, resource_name, flag)
   # Create the JSON object
-  helmet = {
+  shovel = {
     "type" => "minecraft:crafting_shaped",
     "pattern" => [
-      "###",
+      "#",
+      "/",
+      "/"
+    ],
+    "key" => {
+      "#" => {
+        flag == "-i" ? "item" : "tag" => (flag == "-c" ? "c:" : namespace + ":") + resource_name
+      },
+      "/" => {
+        "item" => "minecraft:stick"
+      }
+    },
+    "result" => {
+      "item" => namespace + ":" + resource_name + "_shovel"
+    }
+  }
+
+  # Write the JSON object to a file
+  File.open(namespace + "_" + resource_name + "_shovel.json", "w") do |f|
+    f.write(JSON.pretty_generate(shovel))
+  end
+end
+
+def writeSwordJSON(namespace, resource_name, flag)
+  # Create the JSON object
+  sword = {
+    "type" => "minecraft:crafting_shaped",
+    "pattern" => [
+      "#",
+      "#",
+      "/"
+    ],
+    "key" => {
+      "#" => {
+        flag == "-i" ? "item" : "tag" => (flag == "-c" ? "c:" : namespace + ":") + resource_name
+      },
+      "/" => {
+        "item" => "minecraft:stick"
+      }
+    },
+    "result" => {
+      "item" => namespace + ":" + resource_name + "_sword"
+    }
+  }
+
+  # Write the JSON object to a file
+  File.open(namespace + "_" + resource_name + "_sword.json", "w") do |f|
+    f.write(JSON.pretty_generate(sword))
+  end
+end
+
+def writeBootsJSON(namespace, resource_name, flag)
+  # Create the JSON object
+  boots = {
+    "type" => "minecraft:crafting_shaped",
+    "pattern" => [
+      "# #",
       "# #"
     ],
     "key" => {
@@ -220,13 +220,13 @@ def writeHelmetJSON(namespace, resource_name, flag)
       }
     },
     "result" => {
-      "item" => namespace + ":" + resource_name + "_helmet"
+      "item" => namespace + ":" + resource_name + "_boots"
     }
   }
 
   # Write the JSON object to a file
-  File.open(namespace + "_" + resource_name + "_helmet.json", "w") do |f|
-    f.write(JSON.pretty_generate(helmet))
+  File.open(namespace + "_" + resource_name + "_boots.json", "w") do |f|
+    f.write(JSON.pretty_generate(boots))
   end
 end
 
@@ -255,6 +255,30 @@ def writeChestplateJSON(namespace, resource_name, flag)
   end
 end
 
+def writeHelmetJSON(namespace, resource_name, flag)
+  # Create the JSON object
+  helmet = {
+    "type" => "minecraft:crafting_shaped",
+    "pattern" => [
+      "###",
+      "# #"
+    ],
+    "key" => {
+      "#" => {
+        flag == "-i" ? "item" : "tag" => (flag == "-c" ? "c:" : namespace + ":") + resource_name
+      }
+    },
+    "result" => {
+      "item" => namespace + ":" + resource_name + "_helmet"
+    }
+  }
+
+  # Write the JSON object to a file
+  File.open(namespace + "_" + resource_name + "_helmet.json", "w") do |f|
+    f.write(JSON.pretty_generate(helmet))
+  end
+end
+
 def writeLeggingsJSON(namespace, resource_name, flag)
   # Create the JSON object
   leggings = {
@@ -277,30 +301,6 @@ def writeLeggingsJSON(namespace, resource_name, flag)
   # Write the JSON object to a file
   File.open(namespace + "_" + resource_name + "_leggings.json", "w") do |f|
     f.write(JSON.pretty_generate(leggings))
-  end
-end
-
-def writeBootsJSON(namespace, resource_name, flag)
-  # Create the JSON object
-  boots = {
-    "type" => "minecraft:crafting_shaped",
-    "pattern" => [
-      "# #",
-      "# #"
-    ],
-    "key" => {
-      "#" => {
-        flag == "-i" ? "item" : "tag" => (flag == "-c" ? "c:" : namespace + ":") + resource_name
-      }
-    },
-    "result" => {
-      "item" => namespace + ":" + resource_name + "_boots"
-    }
-  }
-
-  # Write the JSON object to a file
-  File.open(namespace + "_" + resource_name + "_boots.json", "w") do |f|
-    f.write(JSON.pretty_generate(boots))
   end
 end
 
