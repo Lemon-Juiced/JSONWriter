@@ -1,6 +1,7 @@
 # JSONWriter
 
-JSONWriter is an application that takes a command line argument containing a namespace, the name of a resource, and a -i or -t flag denoting an item or tag.
+JSONWriter is an application that takes a command line argument containing a namespace, the name of a resource, and a -i, -t, or -c flag denoting an item or tag (either in the given or common directory).
+
 
 It then reads the resource and writes the data to several JSON files.
 

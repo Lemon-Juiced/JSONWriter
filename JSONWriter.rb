@@ -1,5 +1,5 @@
 =begin
-JSONWriter is an application that takes a command line argument containing a namespace, the name of a resource, and a -i or -t flag denoting an item or tag.
+JSONWriter is an application that takes a command line argument containing a namespace, the name of a resource, and a -i, -t, or -c flag denoting an item or tag (either in the given or common directory).
 It then reads the resource and writes the data to several JSON files.
 These JSON files are for Minecraft recipes, for a set of tools and armor.
 The JSON files are written to the current directory.
@@ -14,7 +14,7 @@ require 'json'
 
 def main
   if ARGV.length != 3
-    puts "Usage: ruby JSONWriter.rb <namespace> <resource_name> <-i or -t>"
+    puts "Usage: ruby JSONWriter.rb <namespace> <resource_name> <-i, -t. or -c>"
     if ARGV[0] != nil
       puts "Namespace: " + ARGV[0]
       if ARGV[1] != nil
@@ -42,13 +42,48 @@ def main
   resource_name = ARGV[1]
   flag = ARGV[2]
 
-  if flag != "-i" && flag != "-t"
+  if flag != "-i" && flag != "-t" && flag != "-c"
     puts "Flag: " + flag + " (Invalid flag)"
     exit
   end
 
-  data = {} # Define the data variable appropriately
-  write_json_files(data)
+  write_json_files(namespace, resource_name, flag)
+end
+
+def write_json_files(namespace, resource_name, flag)
+  # Call out to other weapon functions
+  writeSwordJSON(namespace, resource_name, flag)
+
+  # Call out to other armor functions
+
+end
+
+def writeSwordJSON(namespace, resource_name, flag)
+  # Create the JSON object
+  sword = {
+    "type" => "minecraft:crafting_shaped",
+    "pattern" => [
+      "#",
+      "#",
+      "/"
+    ],
+    "key" => {
+      "#" => {
+        flag == "-i" ? "item" : "tag" => (flag == "-c" ? "c:" : namespace + ":") + resource_name
+      },
+      "/" => {
+        "item" => "minecraft:stick"
+      }
+    },
+    "result" => {
+      "item" => namespace + ":" + resource_name + "_sword"
+    }
+  }
+
+  # Write the JSON object to a file
+  File.open(namespace + "_" + resource_name + "_sword.json", "w") do |f|
+    f.write(JSON.pretty_generate(sword))
+  end
 end
 
 main if __FILE__ == $PROGRAM_NAME
