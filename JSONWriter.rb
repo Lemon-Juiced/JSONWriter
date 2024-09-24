@@ -52,6 +52,8 @@ end
 
 def write_json_files(namespace, resource_name, flag)
   # Call out to other weapon functions
+  writeAxeJSON(namespace, resource_name, flag)
+  writeHoeJSON(namespace, resource_name, flag)
   writePickaxeJSON(namespace, resource_name, flag)
   writeSwordJSON(namespace, resource_name, flag)
   writeShovelJSON(namespace, resource_name, flag)
@@ -141,6 +143,62 @@ def writePickaxeJSON(namespace, resource_name, flag)
   # Write the JSON object to a file
   File.open(namespace + "_" + resource_name + "_pickaxe.json", "w") do |f|
     f.write(JSON.pretty_generate(pickaxe))
+  end
+end
+
+def writeAxeJSON(namespace, resource_name, flag)
+  # Create the JSON object
+  axe = {
+    "type" => "minecraft:crafting_shaped",
+    "pattern" => [
+      "##",
+      "/#",
+      "/ "
+    ],
+    "key" => {
+      "#" => {
+        flag == "-i" ? "item" : "tag" => (flag == "-c" ? "c:" : namespace + ":") + resource_name
+      },
+      "/" => {
+        "item" => "minecraft:stick"
+      }
+    },
+    "result" => {
+      "item" => namespace + ":" + resource_name + "_axe"
+    }
+  }
+
+  # Write the JSON object to a file
+  File.open(namespace + "_" + resource_name + "_axe.json", "w") do |f|
+    f.write(JSON.pretty_generate(axe))
+  end
+end
+
+def writeHoeJSON(namespace, resource_name, flag)
+  # Create the JSON object
+  hoe = {
+    "type" => "minecraft:crafting_shaped",
+    "pattern" => [
+      "##",
+      " /",
+      " /"
+    ],
+    "key" => {
+      "#" => {
+        flag == "-i" ? "item" : "tag" => (flag == "-c" ? "c:" : namespace + ":") + resource_name
+      },
+      "/" => {
+        "item" => "minecraft:stick"
+      }
+    },
+    "result" => {
+      "item" => namespace + ":" + resource_name + "_hoe"
+    }
+  }
+
+  # Write the JSON object to a file
+  File.open(namespace + "_" + resource_name + "_hoe.json", "w") do |f|
+    f.write(JSON.pretty_generate(hoe))
   end
 end
 
