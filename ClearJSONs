@@ -1,0 +1,15 @@
+require 'fileutils'
+
+# Get the current directory
+current_directory = Dir.pwd
+
+# Get all JSON files in the current directory
+json_files = Dir.glob(File.join(current_directory, '*.json'))
+
+# Delete each JSON file
+json_files.each do |file|
+    FileUtils.rm(file)
+    puts "Deleted: #{file}"
+end
+
+puts "All JSON files have been deleted from #{current_directory}"
