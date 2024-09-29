@@ -5,7 +5,7 @@ These JSON files are for Minecraft recipes, for a set of tools and armor.
 The JSON files are written to the current directory.
 
 The command line arguments are as follows:
-ruby JSONWriter.rb <namespace> <resource_name> <-i or -t>
+ruby JSONWriter.rb <namespace> <resource_name> <-i, -t, or -c>
 
 Authors: Lemon_Juiced & TechDahTurtle
 =end
